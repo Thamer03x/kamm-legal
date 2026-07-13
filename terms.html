@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,21 +33,21 @@
     line-height: 1.65;
   }
   .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 96px; }
-  header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-  header .badge {
-    width: 40px; height: 40px; border-radius: 12px; background: var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-weight: 700; font-size: 18px;
-  }
-  h1 { font-size: 28px; margin: 0; }
+  header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+  header .logo { width: 40px; height: 40px; border-radius: 12px; display: block; }
+  header h1 { font-size: 22px; margin: 0; }
+  .lang-toggle { display:inline-flex; border:1px solid var(--border); border-radius:10px; padding:3px; margin-bottom: 32px; }
+  .lang-btn { border:none; background:none; color:var(--muted); font:inherit; font-size:13.5px; font-weight:600; padding:7px 16px; border-radius:8px; cursor:pointer; }
+  .lang-btn.active { background:var(--accent); color:#fff; }
+  h1.doc-title { font-size: 28px; margin: 0; }
   .updated { color: var(--muted); font-size: 14px; margin: 4px 0 40px; }
   h2 { font-size: 19px; margin-top: 40px; }
   p, li { font-size: 15.5px; }
   ul { padding-inline-start: 22px; }
   a { color: var(--accent); }
-  .lang-toggle { margin-bottom: 32px; font-size: 14px; }
-  .lang-toggle a { margin-inline-end: 16px; }
-  section[dir="rtl"] { text-align: right; }
+  .lang-section { display: none; }
+  .lang-section.active { display: block; }
+  .lang-section[data-dir="rtl"] { text-align: right; }
   footer { margin-top: 56px; color: var(--muted); font-size: 13px; }
 </style>
 </head>
@@ -55,52 +55,19 @@
 <div class="wrap">
 
   <header>
-    <div class="badge">K</div>
-    <h1>Kamm — Terms of Service</h1>
+    <img class="logo" src="assets/logo.png" alt="Kamm">
+    <h1>Kamm</h1>
   </header>
-  <div class="updated">Last updated: July 8, 2026</div>
 
   <div class="lang-toggle">
-    <a href="#en">English</a>
-    <a href="#ar">العربية</a>
+    <button class="lang-btn active" data-lang="ar" onclick="setLang('ar')">العربية</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
   </div>
 
-  <section id="en">
-    <p>These Terms of Service ("Terms") govern your use of Kamm ("the App"), developed and operated by an independent developer ("we", "us"). By downloading, installing, or using Kamm, you agree to these Terms.</p>
+  <section id="ar" data-dir="rtl" class="lang-section active">
+    <h1 class="doc-title">كَمّ — شروط الاستخدام</h1>
+    <div class="updated">آخر تحديث: ٨ يوليو ٢٠٢٦</div>
 
-    <h2>1. The App</h2>
-    <p>Kamm helps you track subscriptions, bills, and loans, view spending analytics, and set renewal reminders. Kamm is provided for personal, informational, and organizational purposes only and does not provide financial, tax, or legal advice.</p>
-
-    <h2>2. Accounts</h2>
-    <p>Creating an account is optional and is only required to use Kamm Pro cloud features. You are responsible for keeping your login credentials secure. You may delete your account at any time from Settings → Delete Account, which permanently removes your account and associated cloud data.</p>
-
-    <h2>3. Kamm Pro (in-app purchase)</h2>
-    <ul>
-      <li>Kamm Pro is a one-time, lifetime purchase that unlocks: cloud sync, cloud backups, unlimited services, per-service currency, custom reminders, biometric App Lock, and the home-screen widget.</li>
-      <li>Kamm Pro is purchased and billed through the Apple App Store or Google Play, and payment is processed entirely by Apple or Google — we never receive or store your card details.</li>
-      <li>Refunds are handled exclusively by Apple or Google under their respective refund policies. We are unable to issue refunds directly.</li>
-    </ul>
-
-    <h2>4. Acceptable use</h2>
-    <p>You agree not to reverse-engineer, decompile, or misuse the App, and not to use it for any unlawful purpose.</p>
-
-    <h2>5. Disclaimer of warranty</h2>
-    <p>The App is provided "as is" and "as available," without warranties of any kind, express or implied. We do not guarantee the App will be error-free, uninterrupted, or that exchange-rate data will always be accurate or current.</p>
-
-    <h2>6. Limitation of liability</h2>
-    <p>To the maximum extent permitted by law, we are not liable for any indirect, incidental, or consequential damages arising from your use of the App, including any financial decisions made based on information displayed in the App.</p>
-
-    <h2>7. Changes</h2>
-    <p>We may update these Terms from time to time. Continued use of the App after changes take effect constitutes acceptance of the updated Terms.</p>
-
-    <h2>8. Contact</h2>
-    <p>Questions about these Terms? Email <a href="mailto:itsthamer.dev@gmail.com">itsthamer.dev@gmail.com</a>.</p>
-  </section>
-
-  <hr style="margin: 56px 0; border-color: var(--border);">
-
-  <section id="ar" dir="rtl" lang="ar">
-    <h1 style="font-size:24px;">كَمّ — شروط الاستخدام</h1>
     <p>تحكم شروط الاستخدام هذه ("الشروط") استخدامك لتطبيق "كَمّ" ("التطبيق")، الذي طوّره ويديره مطوّر مستقل ("نحن"). بتنزيلك أو تثبيتك أو استخدامك للتطبيق، فإنك توافق على هذه الشروط.</p>
 
     <h2>١. عن التطبيق</h2>
@@ -132,7 +99,51 @@
     <p>لأي استفسار حول هذه الشروط، راسلنا على <a href="mailto:itsthamer.dev@gmail.com">itsthamer.dev@gmail.com</a>.</p>
   </section>
 
+  <section id="en" data-dir="ltr" class="lang-section">
+    <h1 class="doc-title">Kamm — Terms of Service</h1>
+    <div class="updated">Last updated: July 8, 2026</div>
+
+    <p>These Terms of Service ("Terms") govern your use of Kamm ("the App"), developed and operated by an independent developer ("we", "us"). By downloading, installing, or using Kamm, you agree to these Terms.</p>
+
+    <h2>1. The App</h2>
+    <p>Kamm helps you track subscriptions, bills, and loans, view spending analytics, and set renewal reminders. Kamm is provided for personal, informational, and organizational purposes only and does not provide financial, tax, or legal advice.</p>
+
+    <h2>2. Accounts</h2>
+    <p>Creating an account is optional and is only required to use Kamm Pro cloud features. You are responsible for keeping your login credentials secure. You may delete your account at any time from Settings → Delete Account, which permanently removes your account and associated cloud data.</p>
+
+    <h2>3. Kamm Pro (in-app purchase)</h2>
+    <ul>
+      <li>Kamm Pro is a one-time, lifetime purchase that unlocks: cloud sync, cloud backups, unlimited services, per-service currency, custom reminders, biometric App Lock, and the home-screen widget.</li>
+      <li>Kamm Pro is purchased and billed through the Apple App Store or Google Play, and payment is processed entirely by Apple or Google — we never receive or store your card details.</li>
+      <li>Refunds are handled exclusively by Apple or Google under their respective refund policies. We are unable to issue refunds directly.</li>
+    </ul>
+
+    <h2>4. Acceptable use</h2>
+    <p>You agree not to reverse-engineer, decompile, or misuse the App, and not to use it for any unlawful purpose.</p>
+
+    <h2>5. Disclaimer of warranty</h2>
+    <p>The App is provided "as is" and "as available," without warranties of any kind, express or implied. We do not guarantee the App will be error-free, uninterrupted, or that exchange-rate data will always be accurate or current.</p>
+
+    <h2>6. Limitation of liability</h2>
+    <p>To the maximum extent permitted by law, we are not liable for any indirect, incidental, or consequential damages arising from your use of the App, including any financial decisions made based on information displayed in the App.</p>
+
+    <h2>7. Changes</h2>
+    <p>We may update these Terms from time to time. Continued use of the App after changes take effect constitutes acceptance of the updated Terms.</p>
+
+    <h2>8. Contact</h2>
+    <p>Questions about these Terms? Email <a href="mailto:itsthamer.dev@gmail.com">itsthamer.dev@gmail.com</a>.</p>
+  </section>
+
   <footer>© 2026 Kamm. All rights reserved.</footer>
 </div>
+
+<script>
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.querySelectorAll('.lang-btn').forEach(function (b) { b.classList.toggle('active', b.dataset.lang === lang); });
+    document.querySelectorAll('.lang-section').forEach(function (s) { s.classList.toggle('active', s.id === lang); });
+  }
+</script>
 </body>
 </html>

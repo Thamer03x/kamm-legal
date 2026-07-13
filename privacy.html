@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,27 +41,29 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 28px;
   }
-  header .badge {
+  header .logo {
     width: 40px; height: 40px;
     border-radius: 12px;
-    background: var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-weight: 700; font-size: 18px;
+    display: block;
   }
-  h1 { font-size: 28px; margin: 0; }
+  header h1 { font-size: 22px; margin: 0; }
+  .lang-toggle { display:inline-flex; border:1px solid var(--border); border-radius:10px; padding:3px; margin-bottom: 32px; }
+  .lang-btn { border:none; background:none; color:var(--muted); font:inherit; font-size:13.5px; font-weight:600; padding:7px 16px; border-radius:8px; cursor:pointer; }
+  .lang-btn.active { background:var(--accent); color:#fff; }
+  h1.doc-title { font-size: 28px; margin: 0; }
   .updated { color: var(--muted); font-size: 14px; margin: 4px 0 40px; }
   h2 { font-size: 19px; margin-top: 40px; color: var(--text); }
   p, li { color: var(--text); font-size: 15.5px; }
   ul { padding-inline-start: 22px; }
   a { color: var(--accent); }
   table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14.5px; }
-  th, td { text-align: left; padding: 10px 12px; border: 1px solid var(--border); vertical-align: top; }
+  th, td { text-align: start; padding: 10px 12px; border: 1px solid var(--border); vertical-align: top; }
   th { background: var(--card); color: var(--muted); font-weight: 600; }
-  .lang-toggle { margin-bottom: 32px; font-size: 14px; }
-  .lang-toggle a { margin-inline-end: 16px; }
-  section[dir="rtl"] { text-align: right; }
+  .lang-section { display: none; }
+  .lang-section.active { display: block; }
+  .lang-section[data-dir="rtl"] { text-align: right; }
   footer { margin-top: 56px; color: var(--muted); font-size: 13px; }
 </style>
 </head>
@@ -69,17 +71,72 @@
 <div class="wrap">
 
   <header>
-    <div class="badge">K</div>
-    <h1>Kamm — Privacy Policy</h1>
+    <img class="logo" src="assets/logo.png" alt="Kamm">
+    <h1>Kamm</h1>
   </header>
-  <div class="updated">Last updated: July 8, 2026</div>
 
   <div class="lang-toggle">
-    <a href="#en">English</a>
-    <a href="#ar">العربية</a>
+    <button class="lang-btn active" data-lang="ar" onclick="setLang('ar')">العربية</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
   </div>
 
-  <section id="en">
+  <section id="ar" data-dir="rtl" class="lang-section active">
+    <h1 class="doc-title">كَمّ — سياسة الخصوصية</h1>
+    <div class="updated">آخر تحديث: ٨ يوليو ٢٠٢٦</div>
+
+    <p>تطبيق "كَمّ" هو تطبيق لتتبع الاشتراكات والفواتير والقروض، طوّره ويديره مطوّر مستقل ("نحن"). توضّح هذه السياسة ما يجمعه التطبيق من بيانات، ولماذا، وكيف يمكنك التحكم بها.</p>
+
+    <h2>١. البيانات التي نجمعها</h2>
+    <ul>
+      <li><strong>البريد الإلكتروني</strong>: عند إنشاء حساب (بريد/كلمة مرور، أو تسجيل الدخول عبر Google أو Apple) — لغرض المصادقة واستعادة الحساب.</li>
+      <li><strong>معرّف المستخدم</strong>: يُستخدم لربط حسابك ببياناتك وحالة اشتراكك.</li>
+      <li><strong>الدخل الشهري، العملة، اللغة، وتفضيل المظهر</strong>: لمشتركي Kamm Pro فقط، لمزامنة الإعدادات بين أجهزتك.</li>
+      <li><strong>بيانات الاشتراكات/الفواتير/القروض</strong> (الأسماء، المبالغ، العملات، تواريخ الاستحقاق، إعدادات التذكير): لمشتركي Kamm Pro فقط، لأغراض المزامنة والنسخ الاحتياطي السحابي.</li>
+      <li><strong>نسخ احتياطية سحابية</strong>: عند إنشائها من قِبل مشتركي Kamm Pro، بحد أقصى ١٠ نسخ حديثة لكل حساب.</li>
+    </ul>
+    <p>إذا لم تكن مشتركاً في Kamm Pro، تبقى جميع بياناتك المالية على جهازك فقط ولا تُرسل إلى خوادمنا إطلاقاً.</p>
+
+    <h2>٢. بيانات لا نجمعها</h2>
+    <ul>
+      <li>لا نستخدم أي أدوات إعلانات أو تحليلات، ولا نتتبعك عبر تطبيقات أو مواقع أخرى.</li>
+      <li>لا نجمع موقعك الجغرافي، جهات اتصالك، صورك، أو سجل تصفحك.</li>
+      <li>بصمة الوجه/الإصبع (قفل التطبيق) تُدار بالكامل عبر نظام تشغيل جهازك — نحن لا نرى ولا نخزّن أي بيانات بيومترية.</li>
+      <li>لا نرى ولا نخزّن بيانات بطاقتك البنكية أبداً؛ عمليات الشراء تُعالَج عبر Apple أو Google وعبر RevenueCat.</li>
+    </ul>
+
+    <h2>٣. خدمات طرف ثالث نستخدمها</h2>
+    <ul>
+      <li><strong>Supabase</strong> — يستضيف قاعدة البيانات والمصادقة لحسابات Kamm Pro.</li>
+      <li><strong>RevenueCat</strong> — يدير عمليات الشراء داخل التطبيق وحالة اشتراك Kamm Pro.</li>
+      <li><strong>تسجيل الدخول عبر Google / Apple</strong> — لغرض المصادقة فقط، وباختيارك.</li>
+      <li><strong>واجهة أسعار الصرف (Frankfurter / البنك المركزي الأوروبي)</strong> — لتوفير أسعار تحويل العملات؛ لا تُرسل أي بيانات شخصية لهذه الخدمة.</li>
+    </ul>
+    <p>لا نبيع بياناتك، ولا نشاركها مع أطراف ثالثة لأغراضهم التسويقية.</p>
+
+    <h2>٤. خياراتك</h2>
+    <ul>
+      <li>يمكنك تعديل أو حذف أي خدمة/فاتورة/قرض في أي وقت من داخل التطبيق.</li>
+      <li>يمكنك حذف نسخ احتياطية فردية، أو حذف حسابك بالكامل (يزيل ملفك الشخصي وبياناتك المتزامنة ونسخك الاحتياطية نهائياً من خوادمنا) من الإعدادات ← حذف الحساب.</li>
+      <li>حذف التطبيق يزيل جميع البيانات المخزّنة محلياً على جهازك.</li>
+    </ul>
+
+    <h2>٥. الاحتفاظ بالبيانات</h2>
+    <p>تُحفظ بياناتك السحابية طالما حسابك نشط. عند حذف حسابك، تُزال البيانات المرتبطة به نهائياً من خوادمنا خلال فترة زمنية معقولة.</p>
+
+    <h2>٦. خصوصية الأطفال</h2>
+    <p>تطبيق كَمّ غير موجّه للأطفال دون سن ١٣ عاماً، ولا نجمع بياناتهم عن قصد.</p>
+
+    <h2>٧. تعديلات على هذه السياسة</h2>
+    <p>قد نحدّث هذه السياسة من وقت لآخر. أي تغييرات جوهرية ستنعكس بتحديث تاريخ "آخر تحديث" أعلاه.</p>
+
+    <h2>٨. تواصل معنا</h2>
+    <p>لأي استفسار حول هذه السياسة أو بياناتك، راسلنا على <a href="mailto:itsthamer.dev@gmail.com">itsthamer.dev@gmail.com</a>.</p>
+  </section>
+
+  <section id="en" data-dir="ltr" class="lang-section">
+    <h1 class="doc-title">Kamm — Privacy Policy</h1>
+    <div class="updated">Last updated: July 8, 2026</div>
+
     <p>Kamm ("the App") is a subscription, bill, and loan tracker developed and operated by an independent developer ("we", "us"). This policy explains what information the App collects, why, and how you can control it.</p>
 
     <h2>1. Information we collect</h2>
@@ -130,60 +187,16 @@
     <p>Questions about this policy or your data? Email <a href="mailto:itsthamer.dev@gmail.com">itsthamer.dev@gmail.com</a>.</p>
   </section>
 
-  <hr style="margin: 56px 0; border-color: var(--border);">
-
-  <section id="ar" dir="rtl" lang="ar">
-    <h1 style="font-size:24px;">كَمّ — سياسة الخصوصية</h1>
-    <p>تطبيق "كَمّ" هو تطبيق لتتبع الاشتراكات والفواتير والقروض، طوّره ويديره مطوّر مستقل ("نحن"). توضّح هذه السياسة ما يجمعه التطبيق من بيانات، ولماذا، وكيف يمكنك التحكم بها.</p>
-
-    <h2>١. البيانات التي نجمعها</h2>
-    <ul>
-      <li><strong>البريد الإلكتروني</strong>: عند إنشاء حساب (بريد/كلمة مرور، أو تسجيل الدخول عبر Google أو Apple) — لغرض المصادقة واستعادة الحساب.</li>
-      <li><strong>معرّف المستخدم</strong>: يُستخدم لربط حسابك ببياناتك وحالة اشتراكك.</li>
-      <li><strong>الدخل الشهري، العملة، اللغة، وتفضيل المظهر</strong>: لمشتركي Kamm Pro فقط، لمزامنة الإعدادات بين أجهزتك.</li>
-      <li><strong>بيانات الاشتراكات/الفواتير/القروض</strong> (الأسماء، المبالغ، العملات، تواريخ الاستحقاق، إعدادات التذكير): لمشتركي Kamm Pro فقط، لأغراض المزامنة والنسخ الاحتياطي السحابي.</li>
-      <li><strong>نسخ احتياطية سحابية</strong>: عند إنشائها من قِبل مشتركي Kamm Pro، بحد أقصى ١٠ نسخ حديثة لكل حساب.</li>
-    </ul>
-    <p>إذا لم تكن مشتركاً في Kamm Pro، تبقى جميع بياناتك المالية على جهازك فقط ولا تُرسل إلى خوادمنا إطلاقاً.</p>
-
-    <h2>٢. بيانات لا نجمعها</h2>
-    <ul>
-      <li>لا نستخدم أي أدوات إعلانات أو تحليلات، ولا نتتبعك عبر تطبيقات أو مواقع أخرى.</li>
-      <li>لا نجمع موقعك الجغرافي، جهات اتصالك، صورك، أو سجل تصفحك.</li>
-      <li>بصمة الوجه/الإصبع (قفل التطبيق) تُدار بالكامل عبر نظام تشغيل جهازك — نحن لا نرى ولا نخزّن أي بيانات بيومترية.</li>
-      <li>لا نرى ولا نخزّن بيانات بطاقتك البنكية أبداً؛ عمليات الشراء تُعالَج عبر Apple أو Google وعبر RevenueCat.</li>
-    </ul>
-
-    <h2>٣. خدمات طرف ثالث نستخدمها</h2>
-    <ul>
-      <li><strong>Supabase</strong> — يستضيف قاعدة البيانات والمصادقة لحسابات Kamm Pro.</li>
-      <li><strong>RevenueCat</strong> — يدير عمليات الشراء داخل التطبيق وحالة اشتراك Kamm Pro.</li>
-      <li><strong>تسجيل الدخول عبر Google / Apple</strong> — لغرض المصادقة فقط، وباختيارك.</li>
-      <li><strong>واجهة أسعار الصرف (Frankfurter / البنك المركزي الأوروبي)</strong> — لتوفير أسعار تحويل العملات؛ لا تُرسل أي بيانات شخصية لهذه الخدمة.</li>
-    </ul>
-    <p>لا نبيع بياناتك، ولا نشاركها مع أطراف ثالثة لأغراضهم التسويقية.</p>
-
-    <h2>٤. خياراتك</h2>
-    <ul>
-      <li>يمكنك تعديل أو حذف أي خدمة/فاتورة/قرض في أي وقت من داخل التطبيق.</li>
-      <li>يمكنك حذف نسخ احتياطية فردية، أو حذف حسابك بالكامل (يزيل ملفك الشخصي وبياناتك المتزامنة ونسخك الاحتياطية نهائياً من خوادمنا) من الإعدادات ← حذف الحساب.</li>
-      <li>حذف التطبيق يزيل جميع البيانات المخزّنة محلياً على جهازك.</li>
-    </ul>
-
-    <h2>٥. الاحتفاظ بالبيانات</h2>
-    <p>تُحفظ بياناتك السحابية طالما حسابك نشط. عند حذف حسابك، تُزال البيانات المرتبطة به نهائياً من خوادمنا خلال فترة زمنية معقولة.</p>
-
-    <h2>٦. خصوصية الأطفال</h2>
-    <p>تطبيق كَمّ غير موجّه للأطفال دون سن ١٣ عاماً، ولا نجمع بياناتهم عن قصد.</p>
-
-    <h2>٧. تعديلات على هذه السياسة</h2>
-    <p>قد نحدّث هذه السياسة من وقت لآخر. أي تغييرات جوهرية ستنعكس بتحديث تاريخ "آخر تحديث" أعلاه.</p>
-
-    <h2>٨. تواصل معنا</h2>
-    <p>لأي استفسار حول هذه السياسة أو بياناتك، راسلنا على <a href="mailto:itsthamer.dev@gmail.com">itsthamer.dev@gmail.com</a>.</p>
-  </section>
-
   <footer>© 2026 Kamm. All rights reserved.</footer>
 </div>
+
+<script>
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.querySelectorAll('.lang-btn').forEach(function (b) { b.classList.toggle('active', b.dataset.lang === lang); });
+    document.querySelectorAll('.lang-section').forEach(function (s) { s.classList.toggle('active', s.id === lang); });
+  }
+</script>
 </body>
 </html>
