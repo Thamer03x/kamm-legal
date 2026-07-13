@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,12 +26,11 @@
   }
   .wrap { max-width: 560px; margin: 0 auto; padding: 64px 24px 96px; }
   header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
-  header .badge {
-    width: 40px; height: 40px; border-radius: 12px; background: var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-weight: 700; font-size: 18px;
-  }
-  h1 { font-size: 26px; margin: 0; }
+  header .logo { width: 40px; height: 40px; border-radius: 12px; display: block; }
+  header h1 { font-size: 26px; margin: 0; }
+  .lang-toggle { display:inline-flex; border:1px solid var(--border); border-radius:10px; padding:3px; margin-bottom: 28px; }
+  .lang-btn { border:none; background:none; color:var(--muted); font:inherit; font-size:13.5px; font-weight:600; padding:7px 16px; border-radius:8px; cursor:pointer; }
+  .lang-btn.active { background:var(--accent); color:#fff; }
   p { font-size: 15.5px; }
   .card {
     margin-top: 24px; padding: 20px; border: 1px solid var(--border);
@@ -41,24 +40,57 @@
   .links { margin-top: 32px; display: flex; gap: 16px; font-size: 14px; }
   .links a { color: var(--muted); text-decoration: underline; }
   footer { margin-top: 56px; color: var(--muted); font-size: 13px; }
+  .lang-section { display: none; }
+  .lang-section.active { display: block; }
+  .lang-section[data-dir="rtl"] .links { flex-direction: row; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div class="badge">K</div>
-    <h1>Kamm Support</h1>
+    <img class="logo" src="assets/logo.png" alt="Kamm">
+    <h1>Kamm</h1>
   </header>
-  <p>Need help with Kamm, have a question about your account, or found a bug? We're happy to help.</p>
-  <div class="card">
-    <p style="margin:0 0 6px; color:var(--muted); font-size:13px;">Email us</p>
-    <a href="mailto:itsthamer.dev@gmail.com">itsthamer.dev@gmail.com</a>
+
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="ar" onclick="setLang('ar')">العربية</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">English</button>
   </div>
-  <div class="links">
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="terms.html">Terms of Service</a>
-  </div>
+
+  <section id="ar" data-dir="rtl" class="lang-section active">
+    <p>تحتاج مساعدة في كَمّ، عندك سؤال عن حسابك، أو لقيت خطأ (bug)؟ يسعدنا نساعدك.</p>
+    <div class="card">
+      <p style="margin:0 0 6px; color:var(--muted); font-size:13px;">راسلنا على</p>
+      <a href="mailto:itsthamer.dev@gmail.com">itsthamer.dev@gmail.com</a>
+    </div>
+    <div class="links">
+      <a href="privacy.html">سياسة الخصوصية</a>
+      <a href="terms.html">شروط الاستخدام</a>
+    </div>
+  </section>
+
+  <section id="en" data-dir="ltr" class="lang-section">
+    <p>Need help with Kamm, have a question about your account, or found a bug? We're happy to help.</p>
+    <div class="card">
+      <p style="margin:0 0 6px; color:var(--muted); font-size:13px;">Email us</p>
+      <a href="mailto:itsthamer.dev@gmail.com">itsthamer.dev@gmail.com</a>
+    </div>
+    <div class="links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+  </section>
+
   <footer>© 2026 Kamm. All rights reserved.</footer>
 </div>
+
+<script>
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.querySelectorAll('.lang-btn').forEach(function (b) { b.classList.toggle('active', b.dataset.lang === lang); });
+    document.querySelectorAll('.lang-section').forEach(function (s) { s.classList.toggle('active', s.id === lang); });
+  }
+</script>
 </body>
 </html>
